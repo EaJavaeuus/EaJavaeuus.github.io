@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>МАНУАЛЫ • @httpsglavbot</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0a0012;
+      color: #f0e8ff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    #bg-video {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      filter: brightness(0.35) blur(6px) contrast(1.1) saturate(1.05);
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 6, 28, 0.78);
+      z-index: -1;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      padding: 30px 20px 120px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    /* Верхняя плашка */
+    .top-bar {
+      background: rgba(255, 255, 255, 0.055);
+      border: 1px solid rgba(80, 160, 255, 0.22);
+      border-radius: 22px;
+      padding: 18px 26px;
+      backdrop-filter: blur(22px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.55);
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .left-section {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex: 1;
+    }
+
+    .avatar {
+      width: 92px;
+      height: 92px;
+      border-radius: 18px;
+      border: 2px solid rgba(80, 160, 255, 0.45);
+      object-fit: cover;
+      box-shadow: 0 0 18px rgba(64, 128, 255, 0.25);
+    }
+
+    .info-text {
+      font-size: 1.22rem;
+      line-height: 1.45;
+    }
+
+    .info-text strong {
+      color: #a0c8ff;
+    }
+
+    .status {
+      background: rgba(64, 255, 120, 0.12);
+      border: 1px solid rgba(64, 255, 120, 0.35);
+      color: #60ff9c;
+      padding: 9px 20px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.96rem;
+      white-space: nowrap;
+      box-shadow: 0 0 12px rgba(64, 255, 120, 0.2);
+    }
+
+    /* Основная карточка */
+    .main-card {
+      background: rgba(255, 255, 255, 0.035);
+      border-radius: 28px;
+      border: 1px solid rgba(80, 180, 255, 0.15);
+      backdrop-filter: blur(28px);
+      padding: 48px 32px;
+      box-shadow: 0 15px 60px rgba(0, 0, 0, 0.6);
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 2.1rem;
+      text-align: center;
+      margin-bottom: 40px;
+      background: linear-gradient(90deg, #4080ff, #a0c0ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .manuals-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .manual-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(80, 180, 255, 0.18);
+      border-radius: 20px;
+      padding: 28px 24px;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .manual-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      border-color: #4080ff;
+      box-shadow: 0 20px 40px rgba(64, 128, 255, 0.3);
+    }
+
+    .manual-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 12px;
+      color: #e0f0ff;
+    }
+
+    .manual-card p {
+      font-size: 0.95rem;
+      opacity: 0.75;
+      line-height: 1.5;
+    }
+
+    .neon-line {
+      height: 3px;
+      background: linear-gradient(to right, transparent, #4080ff, transparent);
+      margin-top: 16px;
+      opacity: 0.35;
+    }
+
+    /* ПЛЕЕР ВНИЗУ */
+    .player-container {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(80, 160, 255, 0.25);
+      border-radius: 22px;
+      padding: 20px 24px;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .track-title {
+      font-size: 1.05rem;
+      color: #b0d0ff;
+      text-align: center;
+      margin-bottom: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .player-main {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn {
+      background: rgba(80, 160, 255, 0.25);
+      border: none;
+      color: #c0e0ff;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      font-size: 1.4rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .btn:hover {
+      background: rgba(80, 160, 255, 0.5);
+      transform: scale(1.08);
+    }
+
+    .btn.play-pause {
+      width: 52px;
+      height: 52px;
+      font-size: 1.7rem;
+      background: rgba(80, 160, 255, 0.4);
+    }
+
+    .progress-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .progress-bar {
+      flex: 1;
+      height: 6px;
+      background: rgba(80, 160, 255, 0.25);
+      border-radius: 999px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(to right, #4080ff, #80c0ff);
+      border-radius: 999px;
+      transition: width 0.1s linear;
+    }
+
+    .time {
+      font-size: 0.85rem;
+      color: #a0c0ff;
+      min-width: 40px;
+      text-align: center;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 0.85rem;
+      opacity: 0.6;
+    }
+
+    .footer a {
+      color: #4080ff;
+      text-decoration: none;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 5, 20, 0.92);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(16px);
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-content {
+      background: rgba(30, 25, 60, 0.65);
+      border: 1px solid rgba(80, 180, 255, 0.45);
+      border-radius: 24px;
+      width: 92%;
+      max-width: 720px;
+      max-height: 88vh;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(64, 128, 255, 0.35);
+      animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes modalPop {
+      0% { transform: scale(0.92) translateY(40px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .modal-header {
+      padding: 24px 32px 16px;
+      border-bottom: 1px solid rgba(80, 180, 255, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h2 {
+      font-size: 1.65rem;
+      color: #4080ff;
+      font-weight: 700;
+    }
+
+    .close-modal {
+      font-size: 2.4rem;
+      color: #80c0ff;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .close-modal:hover {
+      color: #4080ff;
+      transform: rotate(90deg);
+    }
+
+    .modal-body {
+      padding: 32px;
+      max-height: 62vh;
+      overflow-y: auto;
+    }
+
+    .manual-text {
+      font-family: 'Courier New', monospace;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      white-space: pre-wrap;
+      background: rgba(10, 10, 35, 0.6);
+      border: 1px solid rgba(80, 180, 255, 0.25);
+      border-radius: 16px;
+      padding: 24px;
+      color: #d0f0ff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .manual-text:hover {
+      background: rgba(20, 30, 60, 0.8);
+      border-color: #4080ff;
+    }
+
+    .copy-hint {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #80c0ff;
+      margin-top: 12px;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 768px) {
+      .top-bar { flex-direction: column; align-items: stretch; gap: 18px; }
+      .player-container { padding: 18px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <video id="bg-video" autoplay loop muted playsinline></video>
+  <div class="overlay"></div>
+
+  <div class="container">
+
+    <!-- Верхняя плашка -->
+    <div class="top-bar">
+      <div class="left-section">
+        <img src="avatar.png" alt="Avatar" class="avatar">
+        <div class="info-text">
+          Наш бот <strong>@httpsglavbot</strong><br>
+          Наш канал <strong>@https_snoz</strong>
+        </div>
+      </div>
+      <div class="status">
+        Система: Активна
+      </div>
+    </div>
+
+    <!-- Основная карточка с мануалами -->
+    <div class="main-card">
+      <div class="section-title">МАНУАЛЫ ДЛЯ РАБОТЫ</div>
+      <div class="manuals-grid" id="manualsGrid"></div>
+    </div>
+
+    <!-- ПЛЕЕР ВНИЗУ -->
+    <div class="player-container">
+      <div class="track-title" id="trackTitle">Загрузка трека...</div>
+      <div class="player-main">
+        <button class="btn prev" id="prevBtn">⏮</button>
+        <div class="progress-container">
+          <span class="time" id="currentTime">0:00</span>
+          <div class="progress-bar" id="progressBar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <span class="time" id="duration">0:00</span>
+        </div>
+        <button class="btn play-pause" id="playPauseBtn">▶</button>
+        <button class="btn next" id="nextBtn">⏭</button>
+      </div>
+    </div>
+
+    <div class="footer">
+      Сделано для <strong>@httpsglavbot</strong> • 
+      <a href="https://t.me/EaJavar" target="_blank">EaJavar</a>
+    </div>
+  </div>
+
+  <!-- Модальное окно -->
+  <div id="manualModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle"></h2>
+        <span class="close-modal" id="closeModal">×</span>
+      </div>
+      <div class="modal-body">
+        <div id="modalText" class="manual-text"></div>
+        <div class="copy-hint">Нажми на текст — он скопируется</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Фон
+    const backgroundVideos = ["videos/1.mp4","videos/2.mp4","videos/3.mp4","videos/4.mp4","videos/5.mp4"];
+    const videoElement = document.getElementById("bg-video");
+    const randomVideo = backgroundVideos[Math.floor(Math.random() * backgroundVideos.length)];
+    const source = document.createElement("source");
+    source.src = randomVideo;
+    source.type = "video/mp4";
+    videoElement.appendChild(source);
+    videoElement.load();
+    videoElement.play().catch(() => {});
+
+    // Мануалы
+    const manualsList = [
+      { slug: "anonimnost", title: "Мануал по анонимности", desc: "VPN, прокси, антидетект, как не светить IP и аккаунты" },
+      { slug: "rabota-s-botom", title: "Мануал по работе с ботом", desc: "Как запустить, команды, настройка под себя" },
+      { slug: "komandy", title: "Все команды бота", desc: "Полный список команд + примеры использования" },
+      { slug: "bezopasnost", title: "Мануал по безопасности", desc: "Как не словить бан, 2FA, лимиты, анти-мониторинг" },
+      { slug: "pervyy-snos", title: "Первый снос — пошагово", desc: "От первого акка до первого успешного сноса" }
+    ];
+
+    // Плеер
+    const musicTracks = [
+      "music/sekaibeautiful – fak.mp3",
+      "music/@nowagz – gl00myi h34r.mp3",
+      "music/yoshimura – sekairotten + yoshimura - psycho classroom.mp3",
+      "music/секай роттен – жаль что она умрет в последней серии.mp3",
+      "music/sekaibeautiful – ㅤ.mp3",
+      "music/deadwilliam – +@третий inevitabledeath&hopelessfate.mp3"
+    ];
+
+    let currentTrackIndex = 0;
+    const audio = new Audio();
+
+    const trackTitle     = document.getElementById("trackTitle");
+    const playPauseBtn   = document.getElementById("playPauseBtn");
+    const prevBtn        = document.getElementById("prevBtn");
+    const nextBtn        = document.getElementById("nextBtn");
+    const progressFill   = document.getElementById("progressFill");
+    const currentTimeEl  = document.getElementById("currentTime");
+    const durationEl     = document.getElementById("duration");
+    const progressBar    = document.getElementById("progressBar");
+
+    function formatTime(seconds) {
+      if (!seconds || isNaN(seconds)) return "0:00";
+      const min = Math.floor(seconds / 60);
+      const sec = Math.floor(seconds % 60);
+      return `${min}:${sec.toString().padStart(2, '0')}`;
+    }
+
+    function loadAndPlay(index) {
+      if (index < 0 || index >= musicTracks.length) return;
+      currentTrackIndex = index;
+      const filePath = musicTracks[index];
+      const name = filePath.split('/').pop().replace(/\.[^/.]+$/, "");
+      trackTitle.textContent = name;
+
+      audio.src = filePath;
+      audio.load();
+      audio.play().catch(() => {});
+      playPauseBtn.textContent = '❚❚';
+    }
+
+    function togglePlay() {
+      if (audio.paused) {
+        audio.play();
+        playPauseBtn.textContent = '❚❚';
+      } else {
+        audio.pause();
+        playPauseBtn.textContent = '▶';
+      }
+    }
+
+    function updateProgress() {
+      if (!audio.duration) return;
+      const percent = (audio.currentTime / audio.duration) * 100;
+      progressFill.style.width = percent + '%';
+      currentTimeEl.textContent = formatTime(audio.currentTime);
+      durationEl.textContent = formatTime(audio.duration);
+    }
+
+    // Инициализация плеера
+    if (musicTracks.length > 0) {
+      currentTrackIndex = Math.floor(Math.random() * musicTracks.length);
+      loadAndPlay(currentTrackIndex);
+    }
+
+    playPauseBtn.addEventListener("click", togglePlay);
+    prevBtn.addEventListener("click", () => {
+      currentTrackIndex = (currentTrackIndex - 1 + musicTracks.length) % musicTracks.length;
+      loadAndPlay(currentTrackIndex);
+    });
+    nextBtn.addEventListener("click", () => {
+      currentTrackIndex = (currentTrackIndex + 1) % musicTracks.length;
+      loadAndPlay(currentTrackIndex);
+    });
+
+    audio.addEventListener("timeupdate", updateProgress);
+    audio.addEventListener("ended", () => {
+      currentTrackIndex = (currentTrackIndex + 1) % musicTracks.length;
+      loadAndPlay(currentTrackIndex);
+    });
+
+    progressBar.addEventListener("click", e => {
+      const rect = progressBar.getBoundingClientRect();
+      const pos = (e.clientX - rect.left) / rect.width;
+      audio.currentTime = pos * audio.duration;
+    });
+
+    // Мануалы
+    function createManualCards() {
+      const grid = document.getElementById("manualsGrid");
+      grid.innerHTML = "";
+      manualsList.forEach(manual => {
+        const card = document.createElement("div");
+        card.className = "manual-card";
+        card.dataset.slug = manual.slug;
+        card.innerHTML = `
+          <h3>${manual.title}</h3>
+          <p>${manual.desc}</p>
+          <div class="neon-line"></div>
+        `;
+        card.addEventListener("click", () => openManual(manual.slug, manual.title));
+        grid.appendChild(card);
+      });
+    }
+
+    async function openManual(slug, title) {
+      const modal = document.getElementById("manualModal");
+      const titleEl = document.getElementById("modalTitle");
+      const textEl = document.getElementById("modalText");
+
+      titleEl.textContent = title;
+      textEl.textContent = "Загрузка мануала...";
+      modal.classList.add("show");
+
+      try {
+        const res = await fetch(`manuals/${slug}.txt`);
+        if (!res.ok) throw new Error();
+        textEl.textContent = (await res.text()).trim();
+      } catch (e) {
+        textEl.innerHTML = `Мануал «${title}» пока не загружен.<br><br>Создай файл manuals/${slug}.txt`;
+      }
+    }
+
+    function enableCopy() {
+      document.getElementById("manualModal").addEventListener("click", async (e) => {
+        const textBlock = document.getElementById("modalText");
+        if (e.target === textBlock || textBlock.contains(e.target)) {
+          const text = textBlock.textContent.trim();
+          if (text && !text.includes("Загрузка")) {
+            await navigator.clipboard.writeText(text).catch(() => {});
+            const orig = textBlock.style.borderColor;
+            textBlock.style.borderColor = "#60ff9c";
+            setTimeout(() => textBlock.style.borderColor = orig, 700);
+          }
+        }
+      });
+    }
+
+    function closeModal() {
+      document.getElementById("manualModal").classList.remove("show");
+    }
+
+    function init() {
+      createManualCards();
+      enableCopy();
+
+      document.getElementById("closeModal").addEventListener("click", closeModal);
+      document.getElementById("manualModal").addEventListener("click", e => {
+        if (e.target.id === "manualModal") closeModal();
+      });
+      document.addEventListener("keydown", e => {
+        if (e.key === "Escape") closeModal();
+      });
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>
