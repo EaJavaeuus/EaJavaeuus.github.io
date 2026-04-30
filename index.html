@@ -44,6 +44,44 @@
       margin: 0 auto;
     }
 
+    /* НАВИГАЦИЯ */
+    .tabs-nav {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+      justify-content: center;
+    }
+
+    .tab-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(80, 160, 255, 0.2);
+      color: #c0e0ff;
+      padding: 12px 24px;
+      border-radius: 14px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: 0.3s;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+
+    .tab-btn.active {
+      background: rgba(80, 160, 255, 0.25);
+      border-color: #4080ff;
+      color: #fff;
+      box-shadow: 0 0 15px rgba(64, 128, 255, 0.3);
+    }
+
+    .section { display: none; animation: fadeIn 0.4s ease; }
+    .section.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ГЛАВНАЯ СТРАНИЦА */
     .top-bar {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(80, 160, 255, 0.2);
@@ -57,20 +95,8 @@
       gap: 20px;
     }
 
-    .left-section {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .avatar {
-      width: 60px;
-      height: 60px;
-      border-radius: 14px;
-      border: 1px solid rgba(80, 160, 255, 0.4);
-      object-fit: cover;
-    }
-
+    .left-section { display: flex; align-items: center; gap: 15px; }
+    .avatar { width: 60px; height: 60px; border-radius: 14px; border: 1px solid rgba(80, 160, 255, 0.4); object-fit: cover; }
     .info-text { font-size: 1rem; line-height: 1.4; }
     .info-text strong { color: #a0c8ff; }
 
@@ -86,11 +112,7 @@
       backdrop-filter: blur(10px);
     }
 
-    .hub-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
+    .hub-grid, .manuals-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
 
     .link-card {
       background: rgba(255, 255, 255, 0.04);
@@ -101,6 +123,7 @@
       color: inherit;
       transition: all 0.3s ease;
       text-align: center;
+      cursor: pointer;
     }
 
     .link-card:hover {
@@ -112,7 +135,28 @@
     .link-card h3 { font-size: 1.4rem; margin-bottom: 6px; color: #fff; }
     .link-card p { font-size: 0.9rem; opacity: 0.6; }
 
-    /* ТВОЙ ПЛЕЕР */
+    /* МАНУАЛЫ ДИНАМИКА */
+    .back-btn {
+      background: rgba(80, 160, 255, 0.1);
+      border: 1px solid rgba(80, 160, 255, 0.3);
+      color: #a0c8ff;
+      padding: 10px 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .manual-img {
+      width: 100%;
+      border-radius: 18px;
+      margin-bottom: 15px;
+      border: 1px solid rgba(80, 160, 255, 0.2);
+      display: block;
+    }
+
+    /* ПЛЕЕР */
     .player-container {
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(80, 160, 255, 0.25);
@@ -124,60 +168,17 @@
       margin: 40px auto 0;
     }
 
-    .track-title {
-      font-size: 1rem;
-      color: #b0d0ff;
-      text-align: center;
-      margin-bottom: 12px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
+    .track-title { font-size: 0.9rem; color: #b0d0ff; text-align: center; margin-bottom: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .player-main { display: flex; align-items: center; gap: 14px; }
-
-    .btn {
-      background: rgba(80, 160, 255, 0.2);
-      border: none;
-      color: #c0e0ff;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
+    .btn { background: rgba(80, 160, 255, 0.2); border: none; color: #c0e0ff; width: 40px; height: 40px; border-radius: 50%; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+    .btn:hover { background: rgba(80, 160, 255, 0.4); }
     .btn.play-pause { width: 48px; height: 48px; background: rgba(80, 160, 255, 0.35); }
-
     .progress-container { flex: 1; display: flex; align-items: center; gap: 10px; }
+    .progress-bar { flex: 1; height: 5px; background: rgba(80, 160, 255, 0.2); border-radius: 10px; cursor: pointer; position: relative; }
+    .progress-fill { height: 100%; width: 0%; background: #4080ff; border-radius: 10px; }
+    .time { font-size: 0.75rem; color: #a0c0ff; min-width: 35px; }
 
-    .progress-bar {
-      flex: 1;
-      height: 5px;
-      background: rgba(80, 160, 255, 0.2);
-      border-radius: 10px;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .progress-fill {
-      height: 100%;
-      width: 0%;
-      background: #4080ff;
-      border-radius: 10px;
-    }
-
-    .time { font-size: 0.8rem; color: #a0c0ff; min-width: 35px; }
-
-    .footer {
-      text-align: center;
-      margin-top: 50px;
-      font-size: 0.85rem;
-      opacity: 0.5;
-    }
+    .footer { text-align: center; margin-top: 50px; font-size: 0.8rem; opacity: 0.4; letter-spacing: 1px; }
 
     @media (max-width: 600px) {
       .top-bar { flex-direction: column; text-align: center; }
@@ -195,28 +196,56 @@
       Если проект удалят — новые ссылки на канал и бота появятся на этом сайте. Сохрани его.
     </div>
 
-    <div class="top-bar">
-      <div class="left-section">
-        <img src="avatar.png" alt="Avatar" class="avatar">
-        <div class="info-text">
-          Канал: <strong>@https_snoz</strong><br>
-          Бот: <strong>@httpsglavbot</strong>
+    <!-- Переключатель -->
+    <div class="tabs-nav">
+      <button class="tab-btn active" id="btn-main" onclick="openTab('main')">ГЛАВНАЯ</button>
+      <button class="tab-btn" id="btn-manuals" onclick="openTab('manuals')">МАНУАЛЫ</button>
+    </div>
+
+    <!-- СЕКЦИЯ: ГЛАВНАЯ -->
+    <div id="main-section" class="section active">
+      <div class="top-bar">
+        <div class="left-section">
+          <img src="avatar.png" alt="Avatar" class="avatar">
+          <div class="info-text">
+            Канал: <strong>@https_snoz</strong><br>
+            Бот: <strong>@httpsglavbot</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="hub-grid">
+        <a href="https://t.me/https_snoz" class="link-card">
+          <h3>КАНАЛ</h3>
+          <p>Основной ресурс проекта</p>
+        </a>
+        <a href="https://t.me/httpsglavbot" class="link-card">
+          <h3>БОТ</h3>
+          <p>Запустить автоматизацию</p>
+        </a>
+      </div>
+    </div>
+
+    <!-- СЕКЦИЯ: МАНУАЛЫ -->
+    <div id="manuals-section" class="section">
+      <button class="back-btn" id="backBtn" onclick="showManualList()">← К списку мануалов</button>
+      
+      <div id="manual-list-view" class="manuals-grid">
+        <!-- Сюда JS подгрузит список папок -->
+      </div>
+
+      <div id="manual-content-view" style="display: none;">
+        <div class="link-card" style="margin-bottom: 25px; cursor: default;">
+          <h3 id="cur-title">Название</h3>
+          <p id="cur-desc">Описание</p>
+        </div>
+        <div id="manual-images">
+          <!-- Сюда JS подгрузит фотки manual_1.jpg ... -->
         </div>
       </div>
     </div>
 
-    <div class="hub-grid">
-      <a href="https://t.me/https_snoz" class="link-card">
-        <h3>КАНАЛ</h3>
-        <p>Основной ресурс проекта</p>
-      </a>
-      <a href="https://t.me/httpsglavbot" class="link-card">
-        <h3>БОТ</h3>
-        <p>Запустить автоматизацию</p>
-      </a>
-    </div>
-
-    <!-- ТВОЙ ПЛЕЕР -->
+    <!-- ПЛЕЕР -->
     <div class="player-container">
       <div class="track-title" id="trackTitle">Загрузка...</div>
       <div class="player-main">
@@ -239,90 +268,145 @@
   </div>
 
   <script>
-    // Видео фон
+    // --- НАВИГАЦИЯ ---
+    function openTab(name) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(name + '-section').classList.add('active');
+      document.getElementById('btn-' + name).classList.add('active');
+      if(name === 'manuals') loadManualsList();
+    }
+
+    // --- ЛОГИКА МАНУАЛОВ ---
+    // Список ID папок (manuals/1, manuals/2...)
+    const manualFolders = [1]; 
+
+    async function loadManualsList() {
+      const listContainer = document.getElementById('manual-list-view');
+      listContainer.innerHTML = '<p style="text-align:center; opacity:0.5;">Загрузка мануалов...</p>';
+      
+      let html = '';
+      for (const id of manualFolders) {
+        try {
+          const res = await fetch(`manuals/${id}/config.txt`);
+          const text = await res.text();
+          const config = parseConfig(text);
+          html += `
+            <div class="link-card" onclick="openManual(${id}, '${encodeURIComponent(JSON.stringify(config))}')">
+              <h3>${config.TITLE || 'Мануал ' + id}</h3>
+              <p>${config.DESC || 'Нажми, чтобы открыть'}</p>
+            </div>`;
+        } catch (e) { console.log('Ошибка папки ' + id); }
+      }
+      listContainer.innerHTML = html || '<p style="text-align:center; opacity:0.5;">Мануалов пока нет</p>';
+    }
+
+    function parseConfig(text) {
+      const obj = {};
+      text.split('\n').forEach(line => {
+        const [key, ...val] = line.split(':');
+        if(key) obj[key.trim()] = val.join(':').trim();
+      });
+      return obj;
+    }
+
+    async function openManual(id, configRaw) {
+      const config = JSON.parse(decodeURIComponent(configRaw));
+      document.getElementById('manual-list-view').style.display = 'none';
+      document.getElementById('manual-content-view').style.display = 'block';
+      document.getElementById('backBtn').style.display = 'block';
+      
+      document.getElementById('cur-title').textContent = config.TITLE;
+      document.getElementById('cur-desc').textContent = config.DESC;
+      
+      const imgContainer = document.getElementById('manual-images');
+      imgContainer.innerHTML = '';
+
+      // Цикл по картинкам: manual_1, manual_2... пока они не закончатся (ошибка 404)
+      let imgIndex = 1;
+      let stop = false;
+      while(!stop && imgIndex < 50) { // Ограничение 50 фото на мануал
+        const imgUrl = `manuals/${id}/manual_${imgIndex}.jpg`;
+        const check = await fetch(imgUrl);
+        if(check.ok) {
+          const img = document.createElement('img');
+          img.src = imgUrl;
+          img.className = 'manual-img';
+          imgContainer.appendChild(img);
+          imgIndex++;
+        } else {
+          stop = true;
+        }
+      }
+    }
+
+    function showManualList() {
+      document.getElementById('manual-list-view').style.display = 'grid';
+      document.getElementById('manual-content-view').style.display = 'none';
+      document.getElementById('backBtn').style.display = 'none';
+    }
+
+    // --- ФОНОВОЕ ВИДЕО ---
     const backgroundVideos = ["videos/1.mp4", "videos/2.mp4", "videos/3.mp4"];
     const videoElement = document.getElementById("bg-video");
-    const randomVideo = backgroundVideos[Math.floor(Math.random() * backgroundVideos.length)];
-    videoElement.src = randomVideo;
+    videoElement.src = backgroundVideos[Math.floor(Math.random() * backgroundVideos.length)];
 
-    // Плеер
+    // --- ПЛЕЕР ---
     const musicTracks = [
       "music/sekaibeautiful – fak.mp3",
-
       "music/@nowagz – gl00myi h34r.mp3",
-
       "music/yoshimura – sekairotten + yoshimura - psycho classroom.mp3",
-
       "music/секай роттен – жаль что она умрет в последней серии.mp3",
-
       "music/sekaibeautiful – ㅤ.mp3",
-
       "music/deadwilliam – +@третий inevitabledeath&hopelessfate.mp3"
     ];
 
-    let currentTrackIndex = 0;
+    let currentTrackIndex = Math.floor(Math.random() * musicTracks.length);
     const audio = new Audio();
-
     const trackTitle = document.getElementById("trackTitle");
     const playPauseBtn = document.getElementById("playPauseBtn");
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
     const progressFill = document.getElementById("progressFill");
     const currentTimeEl = document.getElementById("currentTime");
     const durationEl = document.getElementById("duration");
-    const progressBar = document.getElementById("progressBar");
-
-    function formatTime(seconds) {
-      if (!seconds || isNaN(seconds)) return "0:00";
-      const min = Math.floor(seconds / 60);
-      const sec = Math.floor(seconds % 60);
-      return `${min}:${sec.toString().padStart(2, '0')}`;
-    }
 
     function loadAndPlay(index) {
       currentTrackIndex = index;
-      const filePath = musicTracks[index];
-      trackTitle.textContent = filePath.split('/').pop().replace(/\.[^/.]+$/, "");
-      audio.src = filePath;
+      const path = musicTracks[index];
+      trackTitle.textContent = path.split('/').pop().replace(/\.[^/.]+$/, "");
+      audio.src = path;
       audio.play().catch(() => {});
       playPauseBtn.textContent = '❚❚';
     }
 
-    playPauseBtn.addEventListener("click", () => {
+    playPauseBtn.onclick = () => {
       if (audio.paused) { audio.play(); playPauseBtn.textContent = '❚❚'; }
       else { audio.pause(); playPauseBtn.textContent = '▶'; }
-    });
+    };
 
-    prevBtn.addEventListener("click", () => {
-      currentTrackIndex = (currentTrackIndex - 1 + musicTracks.length) % musicTracks.length;
-      loadAndPlay(currentTrackIndex);
-    });
+    document.getElementById("prevBtn").onclick = () => loadAndPlay((currentTrackIndex - 1 + musicTracks.length) % musicTracks.length);
+    document.getElementById("nextBtn").onclick = () => loadAndPlay((currentTrackIndex + 1) % musicTracks.length);
 
-    nextBtn.addEventListener("click", () => {
-      currentTrackIndex = (currentTrackIndex + 1) % musicTracks.length;
-      loadAndPlay(currentTrackIndex);
-    });
-
-    audio.addEventListener("timeupdate", () => {
-      const percent = (audio.currentTime / audio.duration) * 100;
-      progressFill.style.width = percent + '%';
+    audio.ontimeupdate = () => {
+      const pct = (audio.currentTime / audio.duration) * 100 || 0;
+      progressFill.style.width = pct + '%';
       currentTimeEl.textContent = formatTime(audio.currentTime);
       durationEl.textContent = formatTime(audio.duration);
-    });
+    };
 
-    audio.addEventListener("ended", () => {
-      currentTrackIndex = (currentTrackIndex + 1) % musicTracks.length;
-      loadAndPlay(currentTrackIndex);
-    });
+    audio.onended = () => document.getElementById("nextBtn").click();
 
-    progressBar.addEventListener("click", e => {
-      const rect = progressBar.getBoundingClientRect();
-      const pos = (e.clientX - rect.left) / rect.width;
-      audio.currentTime = pos * audio.duration;
-    });
+    function formatTime(s) {
+      if(!s || isNaN(s)) return "0:00";
+      const m = Math.floor(s/60);
+      const sec = Math.floor(s%60);
+      return m + ":" + sec.toString().padStart(2, '0');
+    }
 
-    // Авто-старт случайного трека
-    currentTrackIndex = Math.floor(Math.random() * musicTracks.length);
+    document.getElementById("progressBar").onclick = e => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+    };
+
     loadAndPlay(currentTrackIndex);
   </script>
 </body>
