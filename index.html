@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>LEPORET • HUB</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0a0012;
+      color: #f0e8ff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    #bg-video {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      filter: brightness(0.35) blur(6px) contrast(1.1);
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 6, 28, 0.82);
+      z-index: -1;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      padding: 30px 20px 120px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .top-bar {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(80, 160, 255, 0.2);
+      border-radius: 22px;
+      padding: 18px 26px;
+      backdrop-filter: blur(22px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      gap: 20px;
+    }
+
+    .left-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 14px;
+      border: 1px solid rgba(80, 160, 255, 0.4);
+      object-fit: cover;
+    }
+
+    .info-text { font-size: 1rem; line-height: 1.4; }
+    .info-text strong { color: #a0c8ff; }
+
+    .emergency-note {
+      background: rgba(255, 64, 64, 0.08);
+      border: 1px solid rgba(255, 64, 64, 0.2);
+      border-radius: 18px;
+      padding: 15px 20px;
+      margin-bottom: 25px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #ff9090;
+      backdrop-filter: blur(10px);
+    }
+
+    .hub-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .link-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(80, 160, 255, 0.15);
+      border-radius: 20px;
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .link-card:hover {
+      background: rgba(64, 128, 255, 0.1);
+      border-color: #4080ff;
+      transform: translateY(-3px);
+    }
+
+    .link-card h3 { font-size: 1.4rem; margin-bottom: 6px; color: #fff; }
+    .link-card p { font-size: 0.9rem; opacity: 0.6; }
+
+    /* ТВОЙ ПЛЕЕР */
+    .player-container {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(80, 160, 255, 0.25);
+      border-radius: 22px;
+      padding: 20px 24px;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      max-width: 600px;
+      margin: 40px auto 0;
+    }
+
+    .track-title {
+      font-size: 1rem;
+      color: #b0d0ff;
+      text-align: center;
+      margin-bottom: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .player-main { display: flex; align-items: center; gap: 14px; }
+
+    .btn {
+      background: rgba(80, 160, 255, 0.2);
+      border: none;
+      color: #c0e0ff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn.play-pause { width: 48px; height: 48px; background: rgba(80, 160, 255, 0.35); }
+
+    .progress-container { flex: 1; display: flex; align-items: center; gap: 10px; }
+
+    .progress-bar {
+      flex: 1;
+      height: 5px;
+      background: rgba(80, 160, 255, 0.2);
+      border-radius: 10px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: #4080ff;
+      border-radius: 10px;
+    }
+
+    .time { font-size: 0.8rem; color: #a0c0ff; min-width: 35px; }
+
+    .footer {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 0.85rem;
+      opacity: 0.5;
+    }
+
+    @media (max-width: 600px) {
+      .top-bar { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <video id="bg-video" autoplay loop muted playsinline></video>
+  <div class="overlay"></div>
+
+  <div class="container">
+    
+    <div class="emergency-note">
+      Если проект удалят — новые ссылки на канал и бота появятся на этом сайте. Сохрани его.
+    </div>
+
+    <div class="top-bar">
+      <div class="left-section">
+        <img src="avatar.png" alt="Avatar" class="avatar">
+        <div class="info-text">
+          Канал: <strong>@https_snoz</strong><br>
+          Бот: <strong>@httpsglavbot</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="hub-grid">
+      <a href="https://t.me/https_snoz" class="link-card">
+        <h3>КАНАЛ</h3>
+        <p>Основной ресурс проекта</p>
+      </a>
+      <a href="https://t.me/httpsglavbot" class="link-card">
+        <h3>БОТ</h3>
+        <p>Запустить автоматизацию</p>
+      </a>
+    </div>
+
+    <!-- ТВОЙ ПЛЕЕР -->
+    <div class="player-container">
+      <div class="track-title" id="trackTitle">Загрузка...</div>
+      <div class="player-main">
+        <button class="btn prev" id="prevBtn">⏮</button>
+        <div class="progress-container">
+          <span class="time" id="currentTime">0:00</span>
+          <div class="progress-bar" id="progressBar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <span class="time" id="duration">0:00</span>
+        </div>
+        <button class="btn play-pause" id="playPauseBtn">▶</button>
+        <button class="btn next" id="nextBtn">⏭</button>
+      </div>
+    </div>
+
+    <div class="footer">
+      © 2026 Leporet • Создано для своих
+    </div>
+  </div>
+
+  <script>
+    // Видео фон
+    const backgroundVideos = ["videos/1.mp4", "videos/2.mp4", "videos/3.mp4"];
+    const videoElement = document.getElementById("bg-video");
+    const randomVideo = backgroundVideos[Math.floor(Math.random() * backgroundVideos.length)];
+    videoElement.src = randomVideo;
+
+    // Плеер
+    const musicTracks = [
+      "music/sekaibeautiful – fak.mp3",
+
+      "music/@nowagz – gl00myi h34r.mp3",
+
+      "music/yoshimura – sekairotten + yoshimura - psycho classroom.mp3",
+
+      "music/секай роттен – жаль что она умрет в последней серии.mp3",
+
+      "music/sekaibeautiful – ㅤ.mp3",
+
+      "music/deadwilliam – +@третий inevitabledeath&hopelessfate.mp3"
+    ];
+
+    let currentTrackIndex = 0;
+    const audio = new Audio();
+
+    const trackTitle = document.getElementById("trackTitle");
+    const playPauseBtn = document.getElementById("playPauseBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const progressFill = document.getElementById("progressFill");
+    const currentTimeEl = document.getElementById("currentTime");
+    const durationEl = document.getElementById("duration");
+    const progressBar = document.getElementById("progressBar");
+
+    function formatTime(seconds) {
+      if (!seconds || isNaN(seconds)) return "0:00";
+      const min = Math.floor(seconds / 60);
+      const sec = Math.floor(seconds % 60);
+      return `${min}:${sec.toString().padStart(2, '0')}`;
+    }
+
+    function loadAndPlay(index) {
+      currentTrackIndex = index;
+      const filePath = musicTracks[index];
+      trackTitle.textContent = filePath.split('/').pop().replace(/\.[^/.]+$/, "");
+      audio.src = filePath;
+      audio.play().catch(() => {});
+      playPauseBtn.textContent = '❚❚';
+    }
+
+    playPauseBtn.addEventListener("click", () => {
+      if (audio.paused) { audio.play(); playPauseBtn.textContent = '❚❚'; }
+      else { audio.pause(); playPauseBtn.textContent = '▶'; }
+    });
+
+    prevBtn.addEventListener("click", () => {
+      currentTrackIndex = (currentTrackIndex - 1 + musicTracks.length) % musicTracks.length;
+      loadAndPlay(currentTrackIndex);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      currentTrackIndex = (currentTrackIndex + 1) % musicTracks.length;
+      loadAndPlay(currentTrackIndex);
+    });
+
+    audio.addEventListener("timeupdate", () => {
+      const percent = (audio.currentTime / audio.duration) * 100;
+      progressFill.style.width = percent + '%';
+      currentTimeEl.textContent = formatTime(audio.currentTime);
+      durationEl.textContent = formatTime(audio.duration);
+    });
+
+    audio.addEventListener("ended", () => {
+      currentTrackIndex = (currentTrackIndex + 1) % musicTracks.length;
+      loadAndPlay(currentTrackIndex);
+    });
+
+    progressBar.addEventListener("click", e => {
+      const rect = progressBar.getBoundingClientRect();
+      const pos = (e.clientX - rect.left) / rect.width;
+      audio.currentTime = pos * audio.duration;
+    });
+
+    // Авто-старт случайного трека
+    currentTrackIndex = Math.floor(Math.random() * musicTracks.length);
+    loadAndPlay(currentTrackIndex);
+  </script>
+</body>
+</html>
