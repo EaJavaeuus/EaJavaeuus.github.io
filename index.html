@@ -13,8 +13,8 @@
 
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #0a0012;
-      color: #f0e8ff;
+      background: #06020b;
+      color: #e2d9f3;
       min-height: 100vh;
       overflow-x: hidden;
     }
@@ -26,13 +26,13 @@
       height: 100%;
       object-fit: cover;
       z-index: -2;
-      filter: brightness(0.35) blur(6px) contrast(1.1);
+      filter: brightness(0.25) blur(8px) contrast(1.2);
     }
 
     .overlay {
       position: fixed;
       inset: 0;
-      background: rgba(8, 6, 28, 0.82);
+      background: rgba(4, 3, 15, 0.88);
       z-index: -1;
     }
 
@@ -47,199 +47,190 @@
     /* НАВИГАЦИЯ */
     .tabs-nav {
       display: flex;
-      gap: 10px;
-      margin-bottom: 25px;
+      gap: 8px;
+      margin-bottom: 30px;
       justify-content: center;
     }
 
     .tab-btn {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(80, 160, 255, 0.2);
-      color: #c0e0ff;
-      padding: 12px 24px;
-      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(130, 90, 255, 0.15);
+      color: #a5b5c5;
+      padding: 12px 22px;
+      border-radius: 10px;
       cursor: pointer;
       backdrop-filter: blur(10px);
-      transition: 0.3s;
+      transition: all 0.2s ease;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       letter-spacing: 1px;
     }
 
     .tab-btn.active {
-      background: rgba(80, 160, 255, 0.25);
-      border-color: #4080ff;
+      background: rgba(140, 80, 255, 0.15);
+      border-color: #8a40ff;
       color: #fff;
-      box-shadow: 0 0 15px rgba(64, 128, 255, 0.3);
+      box-shadow: 0 0 12px rgba(138, 64, 255, 0.2);
     }
 
-    .section { display: none; animation: fadeIn 0.4s ease; }
+    .section { display: none; }
     .section.active { display: block; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
 
     /* ГЛАВНАЯ СТРАНИЦА */
     .top-bar {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(80, 160, 255, 0.2);
-      border-radius: 22px;
-      padding: 18px 26px;
-      backdrop-filter: blur(22px);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(140, 80, 255, 0.15);
+      border-radius: 16px;
+      padding: 16px 22px;
+      backdrop-filter: blur(20px);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 32px;
+      margin-bottom: 25px;
       gap: 20px;
     }
 
     .left-section { display: flex; align-items: center; gap: 15px; }
-    .avatar { width: 60px; height: 60px; border-radius: 14px; border: 1px solid rgba(80, 160, 255, 0.4); object-fit: cover; }
-    .info-text { font-size: 1rem; line-height: 1.4; }
-    .info-text strong { color: #a0c8ff; }
+    .avatar { width: 55px; height: 55px; border-radius: 10px; border: 1px solid rgba(140, 80, 255, 0.3); object-fit: cover; }
+    .info-text { font-size: 0.95rem; line-height: 1.4; }
+    .info-text strong { color: #b99aff; }
 
     .emergency-note {
-      background: rgba(255, 64, 64, 0.08);
-      border: 1px solid rgba(255, 64, 64, 0.2);
-      border-radius: 18px;
-      padding: 15px 20px;
+      background: rgba(255, 64, 64, 0.05);
+      border: 1px solid rgba(255, 64, 64, 0.15);
+      border-radius: 14px;
+      padding: 14px 20px;
       margin-bottom: 25px;
       text-align: center;
-      font-size: 0.9rem;
-      color: #ff9090;
+      font-size: 0.88rem;
+      color: #ff8080;
       backdrop-filter: blur(10px);
+      line-height: 1.4;
     }
 
-    .hub-grid, .manuals-grid, .subs-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    .hub-grid, .manuals-grid, .subs-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
 
     .link-card {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(80, 160, 255, 0.15);
-      border-radius: 20px;
-      padding: 24px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(140, 80, 255, 0.1);
+      border-radius: 16px;
+      padding: 22px;
       text-decoration: none;
       color: inherit;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
       text-align: center;
       cursor: pointer;
     }
 
     .link-card:hover {
-      background: rgba(64, 128, 255, 0.1);
-      border-color: #4080ff;
-      transform: translateY(-3px);
+      background: rgba(140, 80, 255, 0.06);
+      border-color: #8a40ff;
     }
 
-    .link-card h3 { font-size: 1.4rem; margin-bottom: 6px; color: #fff; }
-    .link-card p { font-size: 0.9rem; opacity: 0.6; }
+    .link-card h3 { font-size: 1.3rem; margin-bottom: 4px; color: #fff; letter-spacing: 0.5px; }
+    .link-card p { font-size: 0.85rem; opacity: 0.5; }
 
-    /* КАРТОЧКИ ПОДПИСОК (УЛУЧШЕННЫЕ) */
+    /* КАРТОЧКИ ПОДПИСОК (БЕЗ ИИ-БРЕДА) */
     .sub-card {
-      background: rgba(15, 10, 35, 0.6);
-      border: 1px solid rgba(140, 80, 255, 0.2);
-      border-radius: 24px;
-      padding: 28px;
-      text-align: left;
+      background: rgba(10, 7, 20, 0.7);
+      border: 1px solid rgba(140, 80, 255, 0.15);
+      border-radius: 16px;
+      padding: 24px;
       backdrop-filter: blur(15px);
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      position: relative;
-      overflow: hidden;
     }
     
     .sub-card:hover {
-      border-color: #8a40ff;
-      box-shadow: 0 10px 30px rgba(138, 64, 255, 0.15);
-      transform: translateY(-4px);
+      border-color: rgba(138, 64, 255, 0.4);
+      background: rgba(13, 9, 26, 0.8);
     }
 
-    .sub-card.vip { border-color: rgba(255, 190, 40, 0.3); }
-    .sub-card.vip:hover { border-color: #ffbe28; box-shadow: 0 10px 30px rgba(255, 190, 40, 0.15); }
-    
-    .sub-card.custom { border-color: rgba(255, 40, 100, 0.3); }
-    .sub-card.custom:hover { border-color: #ff2864; box-shadow: 0 10px 30px rgba(255, 40, 100, 0.15); }
+    .sub-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 12px;
+    }
 
-    .sub-card h3 { font-size: 1.6rem; color: #fff; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
-    .sub-card .price { font-size: 1.4rem; font-weight: 700; color: #a0ffc0; margin-bottom: 15px; }
-    .sub-card.agreement .price { color: #a0e0ff; }
+    .sub-title { font-size: 1.25rem; font-weight: 700; color: #fff; }
+    .sub-price { font-size: 1.2rem; font-weight: 700; color: #40ff90; text-shadow: 0 0 10px rgba(64, 255, 144, 0.15); }
+    .sub-card.agreement .sub-price { color: #40bfff; text-shadow: none; }
     
-    .sub-features { list-style: none; margin-bottom: 25px; }
-    .sub-features li { font-size: 0.95rem; opacity: 0.85; margin-bottom: 8px; display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
-    .sub-features li::before { content: "⚡"; color: #8a40ff; font-size: 0.85rem; margin-top: 2px; }
-    .sub-card.vip .sub-features li::before { content: "👑"; }
-    .sub-card.custom .sub-features li::before { content: "🔥"; }
-    .sub-card.agreement .sub-features li::before { content: "🤝"; }
+    .sub-features { list-style: none; margin-bottom: 22px; }
+    .sub-features li { font-size: 0.9rem; color: #cbd2e0; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; line-height: 1.4; }
+    .sub-features li::before { content: "—"; color: #8a40ff; font-weight: bold; }
 
     .buy-btn {
-      background: linear-gradient(135deg, #5040ff, #8a40ff);
+      display: block;
+      background: #140e24;
+      border: 1px solid #8a40ff;
       color: #fff;
-      border: none;
-      padding: 14px;
-      border-radius: 14px;
+      padding: 12px;
+      border-radius: 10px;
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 0.9rem;
       cursor: pointer;
       text-align: center;
       text-decoration: none;
-      transition: 0.3s;
-      box-shadow: 0 4px 15px rgba(100, 64, 255, 0.3);
+      transition: all 0.2s ease;
     }
-    .buy-btn:hover { opacity: 0.9; transform: scale(1.02); }
-    .sub-card.vip .buy-btn { background: linear-gradient(135deg, #d49a00, #ffbe28); box-shadow: 0 4px 15px rgba(255, 190, 40, 0.3); color: #201000; }
-    .sub-card.custom .buy-btn { background: linear-gradient(135deg, #cc1446, #ff2864); box-shadow: 0 4px 15px rgba(255, 40, 100, 0.3); }
-    .sub-card.agreement .buy-btn { background: linear-gradient(135deg, #1e60b3, #40a0ff); box-shadow: 0 4px 15px rgba(64, 160, 255, 0.3); }
+    .buy-btn:hover {
+      background: #8a40ff;
+      box-shadow: 0 0 15px rgba(138, 64, 255, 0.3);
+    }
 
     /* МАНУАЛЫ ДИНАМИКА */
     .back-btn {
-      background: rgba(80, 160, 255, 0.1);
-      border: 1px solid rgba(80, 160, 255, 0.3);
+      background: rgba(80, 160, 255, 0.05);
+      border: 1px solid rgba(140, 80, 255, 0.2);
       color: #a0c8ff;
       padding: 10px 20px;
-      border-radius: 12px;
+      border-radius: 10px;
       margin-bottom: 20px;
       cursor: pointer;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       display: none;
     }
 
     .manual-img {
       width: 100%;
-      border-radius: 18px;
+      border-radius: 14px;
       margin-bottom: 15px;
-      border: 1px solid rgba(80, 160, 255, 0.2);
+      border: 1px solid rgba(140, 80, 255, 0.15);
       display: block;
     }
 
     /* ПЛЕЕР */
     .player-container {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(80, 160, 255, 0.25);
-      border-radius: 22px;
-      padding: 20px 24px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(140, 80, 255, 0.15);
+      border-radius: 18px;
+      padding: 18px 22px;
       backdrop-filter: blur(18px);
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
       max-width: 600px;
       margin: 40px auto 0;
     }
 
-    .track-title { font-size: 0.9rem; color: #b0d0ff; text-align: center; margin-bottom: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .track-title { font-size: 0.85rem; color: #a5b5c5; text-align: center; margin-bottom: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: monospace; }
     .player-main { display: flex; align-items: center; gap: 14px; }
-    .btn { background: rgba(80, 160, 255, 0.2); border: none; color: #c0e0ff; width: 40px; height: 40px; border-radius: 50%; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
-    .btn:hover { background: rgba(80, 160, 255, 0.4); }
-    .btn.play-pause { width: 48px; height: 48px; background: rgba(80, 160, 255, 0.35); }
+    .btn { background: rgba(140, 80, 255, 0.1); border: 1px solid rgba(140, 80, 255, 0.15); color: #c0e0ff; width: 38px; height: 38px; border-radius: 50%; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+    .btn:hover { background: rgba(140, 80, 255, 0.25); border-color: #8a40ff; }
+    .btn.play-pause { width: 44px; height: 44px; background: rgba(140, 80, 255, 0.2); }
     .progress-container { flex: 1; display: flex; align-items: center; gap: 10px; }
-    .progress-bar { flex: 1; height: 5px; background: rgba(80, 160, 255, 0.2); border-radius: 10px; cursor: pointer; position: relative; }
-    .progress-fill { height: 100%; width: 0%; background: #4080ff; border-radius: 10px; }
-    .time { font-size: 0.75rem; color: #a0c0ff; min-width: 35px; }
+    .progress-bar { flex: 1; height: 4px; background: rgba(255, 255, 255, 0.08); border-radius: 10px; cursor: pointer; position: relative; }
+    .progress-fill { height: 100%; width: 0%; background: #8a40ff; border-radius: 10px; }
+    .time { font-size: 0.75rem; color: #8899a6; min-width: 35px; font-family: monospace; }
 
-    .footer { text-align: center; margin-top: 50px; font-size: 0.8rem; opacity: 0.4; letter-spacing: 1px; }
+    .footer { text-align: center; margin-top: 50px; font-size: 0.75rem; opacity: 0.3; letter-spacing: 1px; }
 
     @media (max-width: 600px) {
-      .top-bar { flex-direction: column; text-align: center; }
+      .top-bar { flex-direction: column; text-align: center; padding: 20px; }
+      .subs-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -251,12 +242,12 @@
   <div class="container">
     
     <div class="emergency-note">
-      Если проект удалят — новые ссылки на канал и бота появятся на этом сайте. Сохрани его.
+      Если сайт или бот лягут — актуальные линки всегда будут здесь. Добавь в закладки.
     </div>
 
     <div class="tabs-nav">
       <button class="tab-btn active" id="btn-main" onclick="openTab('main')">ГЛАВНАЯ</button>
-      <button class="tab-btn" id="btn-subs" onclick="openTab('subs')">ПОДПИСКИ</button>
+      <button class="tab-btn" id="btn-subs" onclick="openTab('subs')">ТАРИФЫ</button>
       <button class="tab-btn" id="btn-manuals" onclick="openTab('manuals')">МАНУАЛЫ</button>
     </div>
 
@@ -274,11 +265,11 @@
       <div class="hub-grid">
         <a href="https://t.me/https_snoz" class="link-card">
           <h3>КАНАЛ</h3>
-          <p>Основной ресурс проекта</p>
+          <p>Новости проекта и отчеты по сносам</p>
         </a>
         <a href="https://t.me/httpsglavbot" class="link-card">
-          <h3>БОТ</h3>
-          <p>Запустить автоматизацию</p>
+          <h3>ЗАПУСТИТЬ БОТА</h3>
+          <p>Перейти к автоматическому сносу</p>
         </a>
       </div>
     </div>
@@ -288,66 +279,74 @@
         
         <div class="sub-card">
           <div>
-            <h3>💎 Лайт подписка</h3>
-            <div class="price">500₽ <span style="font-size:0.8rem; opacity:0.6; font-weight:normal;">/ навсегда</span></div>
+            <div class="sub-header">
+              <div class="sub-title">LIGHT</div>
+              <div class="sub-price">500₽ / навсегда</div>
+            </div>
             <ul class="sub-features">
-              <li>Полный доступ ко всем приватным методам бота (Заморозка, Сброс сессий, Снос)</li>
-              <li>Приватные векторы обращений и обход систем защиты Cloudflare</li>
-              <li><b>🎁 Подарок:</b> Эксклюзивный мануал по анонимности в сети и сносу аккаунтов</li>
-              <li>Автоматическое обновление прокси и Gmail-почт каждые 2 часа</li>
+              <li>Фулл доступ ко всем приватным методам отправки репортов</li>
+              <li>Обход базовых лимитов и флуд-контроля Telegram</li>
+              <li>Выдача пака мануалов по анонимности и сносу в подарок при покупке</li>
+              <li>Стабильный пул чистых прокси (автоматическое обновление)</li>
             </ul>
           </div>
-          <a href="https://t.me/EaJavar?text=Привет, хочу купить Лайт подписку за 500р" target="_blank" class="buy-btn">Приобрести</a>
+          <a href="https://t.me/EaJavar?text=Куплю Лайт подписку за 500" target="_blank" class="buy-btn">Взять подписку</a>
         </div>
 
-        <div class="sub-card vip">
+        <div class="sub-card">
           <div>
-            <h3>✨ Вип подписка</h3>
-            <div class="price">1000₽ <span style="font-size:0.8rem; opacity:0.6; font-weight:normal;">/ навсегда</span></div>
+            <div class="sub-header">
+              <div class="sub-title">VIP</div>
+              <div class="sub-price">1000₽ / навсегда</div>
+            </div>
             <ul class="sub-features">
-              <li>Все преимущества «Лайт подписки» без ограничений</li>
-              <li><b>🔥 Личная помощь:</b> Если не получилось снести цель ботом, вы можете оставить заявку на снос лично админу в ЛС</li>
-              <li>Повышенный приоритет в очереди отправки запросов API Force</li>
-              <li>Индивидуальные консультации по обходу блокировок от администрации</li>
+              <li>Все функции тарифа LIGHT без ограничений по потокам</li>
+              <li>Если бот не справился с целью — оставляешь заявку на ручной снос лично админу в ЛС</li>
+              <li>Приоритетная очередь на обработку тяжелых векторов и отправку репортов</li>
+              <li>Прямой саппорт по любым вопросам блокировок</li>
             </ul>
           </div>
-          <a href="https://t.me/EaJavar?text=Привет, хочу купить Вип подписку за 1000р" target="_blank" class="buy-btn">Приобрести VIP</a>
+          <a href="https://t.me/EaJavar?text=Куплю Вип подписку за 1000" target="_blank" class="buy-btn">Взять VIP</a>
         </div>
 
-        <div class="sub-card custom">
+        <div class="sub-card">
           <div>
-            <h3>⚡ Кастом подписка</h3>
-            <div class="price">2500₽ <span style="font-size:0.8rem; opacity:0.6; font-weight:normal;">/ навсегда</span></div>
+            <div class="sub-header">
+              <div class="sub-title">CUSTOM PACK</div>
+              <div class="sub-price">2500₽ / навсегда</div>
+            </div>
             <ul class="sub-features">
-              <li>Полный и неограниченный доступ ко всем возможностям экосистемы</li>
-              <li><b>📦 Пакет софта:</b> Сносер в виде терминального скрипта для ПК/термукса (без обфускации кода)</li>
-              <li><b>💻 Исходный код:</b> Вы получаете чистый исходный код этого бота</li>
-              <li>Библиотека мануалов: Полные руководства по Сносу, Доксу, Осинтингу, Анонимности и DDoS-атакам</li>
-              <li>Прямая связь с разработчиком и возможность отправки заявок на личный снос</li>
+              <li>Абсолютный безлимит во всем функционале бота</li>
+              <li>Чистый исходный код бота (скрипт без обфускации и привязок)</li>
+              <li>Автономный сносер в виде терминального скрипта для ПК / Termux</li>
+              <li>Приватные мануалы: Снос, Докс, Осинт, Анонимность и DDoS</li>
+              <li>Возможность передавать сложные цели на личный снос админу</li>
             </ul>
           </div>
-          <a href="https://t.me/EaJavar?text=Привет, хочу купить Кастом подписку за 2500р" target="_blank" class="buy-btn">Купить Кастом</a>
+          <a href="https://t.me/EaJavar?text=Куплю Кастом подписку за 2500" target="_blank" class="buy-btn">Купить пак</a>
         </div>
 
         <div class="sub-card agreement">
           <div>
-            <h3>🤝 Подписка по договору</h3>
-            <div class="price">Договорная</div>
+            <div class="sub-header">
+              <div class="sub-title">CONTRACT</div>
+              <div class="sub-price">Договорная</div>
+            </div>
             <ul class="sub-features">
-              <li>Индивидуальные условия сотрудничества для крупных заказов</li>
-              <li>Всё обсуждается лично с главным администратором проекта в ЛС</li>
-              <li><b>📋 От вас требуется:</b> Указать ваш общий бюджет и подробно расписать, какие объекты вы планируете снести</li>
-              <li>Выделение кастомных серверов и персональных пулов под ваши задачи</li>
+              <li>Индивидуальные условия под конкретные масштабные задачи</li>
+              <li>Обсуждение условий и ТЗ напрямую с админом в ЛС</li>
+              <li>От вас требуется: указать свой бюджет и цель (что именно нужно снести)</li>
+              <li>Выделение приватных серверов под ваш проект при необходимости</li>
             </ul>
           </div>
-          <a href="https://t.me/https_snoz?text=Привет, пишу по поводу подписки по договору. Мой бюджет..." target="_blank" class="buy-btn">Связаться</a>
+          <a href="https://t.me/https_snoz?text=По поводу подписки по договору. Бюджет: " target="_blank" class="buy-btn">Обсудить в ЛС</a>
         </div>
 
       </div>
     </div>
 
     <div id="manuals-section" class="section">
-      <button class="back-btn" id="backBtn" onclick="showManualList()">← К списку мануалов</button>
+      <button class="back-btn" id="backBtn" onclick="showManualList()">← Назад к списку</button>
       
       <div id="manual-list-view" class="manuals-grid">
         </div>
@@ -398,7 +397,7 @@
 
     async function loadManualsList() {
       const listContainer = document.getElementById('manual-list-view');
-      listContainer.innerHTML = '<p style="text-align:center; opacity:0.5;">Загрузка мануалов...</p>';
+      listContainer.innerHTML = '<p style="text-align:center; opacity:0.5; font-family: monospace;">Loading...</p>';
       
       let html = '';
       for (const id of manualFolders) {
@@ -463,7 +462,9 @@
     // --- ФОНОВОЕ ВИДЕО ---
     const backgroundVideos = ["videos/1.mp4", "videos/2.mp4", "videos/3.mp4"];
     const videoElement = document.getElementById("bg-video");
-    videoElement.src = backgroundVideos[Math.floor(Math.random() * backgroundVideos.length)];
+    if(videoElement) {
+      videoElement.src = backgroundVideos[Math.floor(Math.random() * backgroundVideos.length)];
+    }
 
     // --- ПЛЕЕР ---
     const musicTracks = [
