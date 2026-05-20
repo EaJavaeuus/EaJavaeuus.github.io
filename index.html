@@ -112,7 +112,7 @@
       backdrop-filter: blur(10px);
     }
 
-    .hub-grid, .manuals-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    .hub-grid, .manuals-grid, .subs-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
 
     .link-card {
       background: rgba(255, 255, 255, 0.04);
@@ -134,6 +134,64 @@
 
     .link-card h3 { font-size: 1.4rem; margin-bottom: 6px; color: #fff; }
     .link-card p { font-size: 0.9rem; opacity: 0.6; }
+
+    /* КАРТОЧКИ ПОДПИСОК (УЛУЧШЕННЫЕ) */
+    .sub-card {
+      background: rgba(15, 10, 35, 0.6);
+      border: 1px solid rgba(140, 80, 255, 0.2);
+      border-radius: 24px;
+      padding: 28px;
+      text-align: left;
+      backdrop-filter: blur(15px);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .sub-card:hover {
+      border-color: #8a40ff;
+      box-shadow: 0 10px 30px rgba(138, 64, 255, 0.15);
+      transform: translateY(-4px);
+    }
+
+    .sub-card.vip { border-color: rgba(255, 190, 40, 0.3); }
+    .sub-card.vip:hover { border-color: #ffbe28; box-shadow: 0 10px 30px rgba(255, 190, 40, 0.15); }
+    
+    .sub-card.custom { border-color: rgba(255, 40, 100, 0.3); }
+    .sub-card.custom:hover { border-color: #ff2864; box-shadow: 0 10px 30px rgba(255, 40, 100, 0.15); }
+
+    .sub-card h3 { font-size: 1.6rem; color: #fff; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+    .sub-card .price { font-size: 1.4rem; font-weight: 700; color: #a0ffc0; margin-bottom: 15px; }
+    .sub-card.agreement .price { color: #a0e0ff; }
+    
+    .sub-features { list-style: none; margin-bottom: 25px; }
+    .sub-features li { font-size: 0.95rem; opacity: 0.85; margin-bottom: 8px; display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
+    .sub-features li::before { content: "⚡"; color: #8a40ff; font-size: 0.85rem; margin-top: 2px; }
+    .sub-card.vip .sub-features li::before { content: "👑"; }
+    .sub-card.custom .sub-features li::before { content: "🔥"; }
+    .sub-card.agreement .sub-features li::before { content: "🤝"; }
+
+    .buy-btn {
+      background: linear-gradient(135deg, #5040ff, #8a40ff);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: 0.3s;
+      box-shadow: 0 4px 15px rgba(100, 64, 255, 0.3);
+    }
+    .buy-btn:hover { opacity: 0.9; transform: scale(1.02); }
+    .sub-card.vip .buy-btn { background: linear-gradient(135deg, #d49a00, #ffbe28); box-shadow: 0 4px 15px rgba(255, 190, 40, 0.3); color: #201000; }
+    .sub-card.custom .buy-btn { background: linear-gradient(135deg, #cc1446, #ff2864); box-shadow: 0 4px 15px rgba(255, 40, 100, 0.3); }
+    .sub-card.agreement .buy-btn { background: linear-gradient(135deg, #1e60b3, #40a0ff); box-shadow: 0 4px 15px rgba(64, 160, 255, 0.3); }
 
     /* МАНУАЛЫ ДИНАМИКА */
     .back-btn {
@@ -196,13 +254,12 @@
       Если проект удалят — новые ссылки на канал и бота появятся на этом сайте. Сохрани его.
     </div>
 
-    <!-- Переключатель -->
     <div class="tabs-nav">
       <button class="tab-btn active" id="btn-main" onclick="openTab('main')">ГЛАВНАЯ</button>
+      <button class="tab-btn" id="btn-subs" onclick="openTab('subs')">ПОДПИСКИ</button>
       <button class="tab-btn" id="btn-manuals" onclick="openTab('manuals')">МАНУАЛЫ</button>
     </div>
 
-    <!-- СЕКЦИЯ: ГЛАВНАЯ -->
     <div id="main-section" class="section active">
       <div class="top-bar">
         <div class="left-section">
@@ -226,13 +283,74 @@
       </div>
     </div>
 
-    <!-- СЕКЦИЯ: МАНУАЛЫ -->
+    <div id="subs-section" class="section">
+      <div class="subs-grid">
+        
+        <div class="sub-card">
+          <div>
+            <h3>💎 Лайт подписка</h3>
+            <div class="price">500₽ <span style="font-size:0.8rem; opacity:0.6; font-weight:normal;">/ навсегда</span></div>
+            <ul class="sub-features">
+              <li>Полный доступ ко всем приватным методам бота (Заморозка, Сброс сессий, Снос)</li>
+              <li>Приватные векторы обращений и обход систем защиты Cloudflare</li>
+              <li><b>🎁 Подарок:</b> Эксклюзивный мануал по анонимности в сети и сносу аккаунтов</li>
+              <li>Автоматическое обновление прокси и Gmail-почт каждые 2 часа</li>
+            </ul>
+          </div>
+          <a href="https://t.me/EaJavar?text=Привет, хочу купить Лайт подписку за 500р" target="_blank" class="buy-btn">Приобрести</a>
+        </div>
+
+        <div class="sub-card vip">
+          <div>
+            <h3>✨ Вип подписка</h3>
+            <div class="price">1000₽ <span style="font-size:0.8rem; opacity:0.6; font-weight:normal;">/ навсегда</span></div>
+            <ul class="sub-features">
+              <li>Все преимущества «Лайт подписки» без ограничений</li>
+              <li><b>🔥 Личная помощь:</b> Если не получилось снести цель ботом, вы можете оставить заявку на снос лично админу в ЛС</li>
+              <li>Повышенный приоритет в очереди отправки запросов API Force</li>
+              <li>Индивидуальные консультации по обходу блокировок от администрации</li>
+            </ul>
+          </div>
+          <a href="https://t.me/EaJavar?text=Привет, хочу купить Вип подписку за 1000р" target="_blank" class="buy-btn">Приобрести VIP</a>
+        </div>
+
+        <div class="sub-card custom">
+          <div>
+            <h3>⚡ Кастом подписка</h3>
+            <div class="price">2500₽ <span style="font-size:0.8rem; opacity:0.6; font-weight:normal;">/ навсегда</span></div>
+            <ul class="sub-features">
+              <li>Полный и неограниченный доступ ко всем возможностям экосистемы</li>
+              <li><b>📦 Пакет софта:</b> Сносер в виде терминального скрипта для ПК/термукса (без обфускации кода)</li>
+              <li><b>💻 Исходный код:</b> Вы получаете чистый исходный код этого бота</li>
+              <li>Библиотека мануалов: Полные руководства по Сносу, Доксу, Осинтингу, Анонимности и DDoS-атакам</li>
+              <li>Прямая связь с разработчиком и возможность отправки заявок на личный снос</li>
+            </ul>
+          </div>
+          <a href="https://t.me/EaJavar?text=Привет, хочу купить Кастом подписку за 2500р" target="_blank" class="buy-btn">Купить Кастом</a>
+        </div>
+
+        <div class="sub-card agreement">
+          <div>
+            <h3>🤝 Подписка по договору</h3>
+            <div class="price">Договорная</div>
+            <ul class="sub-features">
+              <li>Индивидуальные условия сотрудничества для крупных заказов</li>
+              <li>Всё обсуждается лично с главным администратором проекта в ЛС</li>
+              <li><b>📋 От вас требуется:</b> Указать ваш общий бюджет и подробно расписать, какие объекты вы планируете снести</li>
+              <li>Выделение кастомных серверов и персональных пулов под ваши задачи</li>
+            </ul>
+          </div>
+          <a href="https://t.me/https_snoz?text=Привет, пишу по поводу подписки по договору. Мой бюджет..." target="_blank" class="buy-btn">Связаться</a>
+        </div>
+
+      </div>
+    </div>
+
     <div id="manuals-section" class="section">
       <button class="back-btn" id="backBtn" onclick="showManualList()">← К списку мануалов</button>
       
       <div id="manual-list-view" class="manuals-grid">
-        <!-- Сюда JS подгрузит список папок -->
-      </div>
+        </div>
 
       <div id="manual-content-view" style="display: none;">
         <div class="link-card" style="margin-bottom: 25px; cursor: default;">
@@ -240,12 +358,10 @@
           <p id="cur-desc">Описание</p>
         </div>
         <div id="manual-images">
-          <!-- Сюда JS подгрузит фотки manual_1.jpg ... -->
-        </div>
+          </div>
       </div>
     </div>
 
-    <!-- ПЛЕЕР -->
     <div class="player-container">
       <div class="track-title" id="trackTitle">Загрузка...</div>
       <div class="player-main">
@@ -278,7 +394,6 @@
     }
 
     // --- ЛОГИКА МАНУАЛОВ ---
-    // Список ID папок (manuals/1, manuals/2...)
     const manualFolders = [1]; 
 
     async function loadManualsList() {
@@ -322,10 +437,9 @@
       const imgContainer = document.getElementById('manual-images');
       imgContainer.innerHTML = '';
 
-      // Цикл по картинкам: manual_1, manual_2... пока они не закончатся (ошибка 404)
       let imgIndex = 1;
       let stop = false;
-      while(!stop && imgIndex < 50) { // Ограничение 50 фото на мануал
+      while(!stop && imgIndex < 50) {
         const imgUrl = `manuals/${id}/manual_${imgIndex}.jpg`;
         const check = await fetch(imgUrl);
         if(check.ok) {
